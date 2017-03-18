@@ -1,3 +1,30 @@
-<p>
-  search works!
-</p>
+<h1>
+  Search Movies Component
+</h1>
+<hr>
+<form>
+  <label for="movieTitle">Movie Title</label>
+  <input #movieTitle type="text" name="movieTitle"/>
+<br>
+  <label for="movieYear">Movie Year</label>
+  <input #movieYear type="text" name="movieYear"/>
+<br>
+<label for="moviePage">Movie Page</label>
+<input #moviePage type="number" min="1" max="1" name="moviePage"/>
+<br>
+Results:{{results}}
+<br>
+  <button (click)="search(movieTitle.value,movieYear.value,moviePage.value)">SEARCH</button>
+</form>
+<hr>
+<table>
+  <tr><th>Poster</th><th>Title</th><th>Type</th><th>Year</th><th>imdbID</th></tr>
+  <tr *ngFor="let movie of movies">
+    <td *ngIf="movie.Poster != 'N/A'"><img src="{{movie.Poster}}" style="height:200px; width:150px;"></td>
+    <td *ngIf="movie.Poster == 'N/A'"><img src="" style="height:200px; width:150px;"></td>
+    <td>{{movie.Title}}</td>
+    <td>{{movie.Type}}</td>
+    <td>{{movie.Year}}</td>
+    <td>{{movie.imdbID}}</td>
+  </tr>
+</table>
