@@ -1,44 +1,49 @@
-<h1>
-  Search Movies Component
+<h1 class="w3-center w3-animate-top">
+  Search Movies
 </h1>
-<hr>
-<form>
-  <label for="movieTitle">Movie Title</label>
-  <input #movieTitle type="text" name="movieTitle"/>
-<br>
-  <label for="movieYear">Movie Year</label>
-  <input #movieYear type="text" name="movieYear"/>
-<br>
-  <button (click)="search(movieTitle.value,movieYear.value,1)">SEARCH</button>
-</form>
-<hr>
-<form *ngIf="showPages">
-  <label for="moviePage">Found {{numPages}} Pages</label>
-  <input #moviePage type="number" min="1" max="{{numPages}}" name="moviePage"/>
-<br>
-  <button (click)="search(movieTitle.value,movieYear.value,moviePage.value)">SEARCH PAGE</button>
-</form>
-<hr>
-<br>
-<hr>
-<table *ngIf="details">
-  <tr><th>Title</th><th>Metascore</th><th>Plot</th><th>imdbRating</th><th>imdbVotes</th></tr>
-  <tr>
-    <td>{{details.Title}}</td>
-    <td>{{details.Metascore}}</td>
-    <td>{{details.Plot}}</td>
-    <td>{{details.imdbRating}}</td>
-    <td>{{details.imdbVotes}}</td>
-  </tr>
-</table>
-<table>
-  <tr><th>Poster</th><th>Title</th><th>Type</th><th>Year</th><th>imdbID</th></tr>
-  <tr *ngFor="let movie of movies">
-    <td *ngIf="movie.Poster != 'N/A'"><img src="{{movie.Poster}}" style="height:200px; width:150px;"></td>
-    <td *ngIf="movie.Poster == 'N/A'"><img src="" style="height:200px; width:150px;"></td>
-    <td>{{movie.Title}}</td>
-    <td>{{movie.Type}}</td>
-    <td>{{movie.Year}}</td>
-    <td>{{movie.imdbID}}<button (click)="getdetail(movie.imdbID)">DETAILS</button></td>
-  </tr>
-</table>
+
+<div class="w3-sidebar w3-bar-block w3-animate-left" style="width:25%">
+  <form>
+    <div class="w3-margin">
+      <label for="movieTitle" class="w3-label w3-text-black">Movie Title</label>
+      <input #movieTitle type="text" name="movieTitle" class="w3-input" required/>
+    <br>
+      <label for="movieYear" class="w3-label w3-text-black">Movie Year</label>
+      <input #movieYear type="text" name="movieYear" class="w3-input"/>
+    <br>
+      <button (click)="search(movieTitle.value,movieYear.value,1)" class="w3-button w3-hover-blue">SEARCH</button>
+    </div>
+    <div *ngIf="showPages" class="w3-margin">
+      <label for="moviePage" class="w3-label w3-text-black">Found {{numPages}} pages.</label>
+      <input #moviePage type="number" min="1" max="{{numPages}}" name="moviePage" value="1" class="w3-input"/>
+    <br>
+      <button (click)="search(movieTitle.value,movieYear.value,moviePage.value)" class="w3-button w3-hover-red">SEARCH PAGE</button>
+    </div>
+  </form>
+
+</div>
+
+<div style="margin-left:25%">
+
+  <table *ngIf="details" class="w3-table">
+    <tr><th>Title</th><th>Metascore</th><th>Plot</th><th>imdbRating</th><th>imdbVotes</th></tr>
+    <tr>
+      <td>{{details.Title}}</td>
+      <td>{{details.Metascore}}</td>
+      <td>{{details.Plot}}</td>
+      <td>{{details.imdbRating}}</td>
+      <td>{{details.imdbVotes}}</td>
+    </tr>
+  </table>
+
+  <div *ngFor="let movie of movies" class="w3-third">
+    <div class="w3-card-4" style="width:200px;height:400px;">
+    <div *ngIf="movie.Poster != 'N/A'"><img src="{{movie.Poster}}" style="width:200px;height:300px;"></div>
+    <div *ngIf="movie.Poster == 'N/A'"><img src="" style="width:200px;height:300px;"></div>
+    <div class="w3-container w3-center">
+      <div>{{movie.Title}}</div>
+      <button (click)="getdetails(movie.imdbID)">DETAILS</button>
+    </div>
+  </div>
+
+</div>

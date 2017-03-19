@@ -28,8 +28,7 @@ export class SearchComponent implements OnInit {
     this.details=null;
   }
 
-  getdetail(id:string) {
-    //alert(id);
+  getdetails(id:string) {
     this.detailsMoviesService.detailsMovie(id).subscribe(details=>{
       this.details=details;
       console.log(this.details);
