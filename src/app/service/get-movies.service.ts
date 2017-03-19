@@ -6,11 +6,11 @@ import 'rxjs/add/operator/map';
 export class GetMoviesService {
 
   constructor(private http:Http) {
-    console.log("GetMovieService Initialized!")
+    console.log("GetMoviesService Initialized!")
   }
 
-  getMovies(title:string, year:string, page:string) {
-    return this.http.get('http://www.omdbapi.com/?page='+page+'&type=movie&y='+year+'&s='+title).map(res => res.json());
+  getMovies(title:string, year:string, page:number) {
+    return this.http.get('http://www.omdbapi.com/?type=movie&page='+page+'&y='+year+'&s='+title).map(res => res.json());
   }
 
 }

@@ -9,14 +9,28 @@
   <label for="movieYear">Movie Year</label>
   <input #movieYear type="text" name="movieYear"/>
 <br>
-<label for="moviePage">Movie Page</label>
-<input #moviePage type="number" min="1" max="1" name="moviePage"/>
-<br>
-Results:{{results}}
-<br>
-  <button (click)="search(movieTitle.value,movieYear.value,moviePage.value)">SEARCH</button>
+  <button (click)="search(movieTitle.value,movieYear.value,1)">SEARCH</button>
 </form>
 <hr>
+<form *ngIf="showPages">
+  <label for="moviePage">Found {{numPages}} Pages</label>
+  <input #moviePage type="number" min="1" max="{{numPages}}" name="moviePage"/>
+<br>
+  <button (click)="search(movieTitle.value,movieYear.value,moviePage.value)">SEARCH PAGE</button>
+</form>
+<hr>
+<br>
+<hr>
+<table *ngIf="details">
+  <tr><th>Title</th><th>Metascore</th><th>Plot</th><th>imdbRating</th><th>imdbVotes</th></tr>
+  <tr>
+    <td>{{details.Title}}</td>
+    <td>{{details.Metascore}}</td>
+    <td>{{details.Plot}}</td>
+    <td>{{details.imdbRating}}</td>
+    <td>{{details.imdbVotes}}</td>
+  </tr>
+</table>
 <table>
   <tr><th>Poster</th><th>Title</th><th>Type</th><th>Year</th><th>imdbID</th></tr>
   <tr *ngFor="let movie of movies">
@@ -25,6 +39,6 @@ Results:{{results}}
     <td>{{movie.Title}}</td>
     <td>{{movie.Type}}</td>
     <td>{{movie.Year}}</td>
-    <td>{{movie.imdbID}}</td>
+    <td>{{movie.imdbID}}<button (click)="getdetail(movie.imdbID)">DETAILS</button></td>
   </tr>
 </table>
